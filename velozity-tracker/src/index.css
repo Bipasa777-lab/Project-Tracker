@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  :root {
+    color-scheme: dark;
+    --scrollbar-thumb: #2e3a52;
+    --scrollbar-track: transparent;
+  }
+
+  body {
+    @apply bg-bg-1 text-slate-100 overflow-hidden h-screen;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3d4f6e; }
+
+  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); cursor: pointer; }
+}
+
+@layer components {
+  /* Priority badges */
+  .badge-critical { @apply bg-red-500/20 text-red-300; }
+  .badge-high     { @apply bg-orange-500/20 text-orange-300; }
+  .badge-medium   { @apply bg-yellow-500/20 text-yellow-300; }
+  .badge-low      { @apply bg-green-500/20 text-green-300; }
+
+  /* Due date variants */
+  .due-overdue { @apply bg-red-500/15 text-red-300; }
+  .due-today   { @apply bg-yellow-500/15 text-yellow-300; }
+  .due-normal  { @apply bg-bg-4 text-slate-400; }
+}
+
+/* Drag ghost — rendered outside React tree */
+#drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 272px;
+  opacity: 0.88;
+  transform: rotate(2deg);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+  border-radius: 8px;
+  background: #1e2535;
+  border: 1px solid #4f8ef7;
+  padding: 10px;
+  display: none;
+}
+
+/* Kanban drag placeholder */
+.drag-placeholder {
+  border: 2px dashed #3d4f6e;
+  border-radius: 8px;
+  background: rgba(79,142,247,0.05);
+  flex-shrink: 0;
+  transition: height 0.1s;
+}
+
+/* Column drop highlight */
+.drop-active {
+  background: rgba(79,142,247,0.06) !important;
+  border-color: #4f8ef7 !important;
+}
+
+/* Sim user pop animation */
+@keyframes popIn {
+  from { transform: scale(0) translateY(4px); opacity: 0; }
+  to   { transform: scale(1) translateY(0);   opacity: 1; }
+}
+.sim-avatar-enter { animation: popIn 0.25s ease forwards; }
