@@ -57,13 +57,20 @@ export default function VirtualList({ tasks, sortKey, sortDir, onSort, onClearFi
     return () => ro.disconnect();
   }, []);
 
+  // Sync internal state with DOM scrollTop when list shrinks/expands
+  useLayoutEffect(() => {
+    if (scrollRef.current) setScrollTop(scrollRef.current.scrollTop);
+  }, [tasks.length]);
+
   const onScroll = useCallback(() => {
     if (scrollRef.current) setScrollTop(scrollRef.current.scrollTop);
   }, []);
 
   const totalH   = tasks.length * ROW_H;
-  const startIdx = Math.max(0, Math.floor(scrollTop / ROW_H) - BUFFER);
-  const endIdx   = Math.min(tasks.length - 1, Math.ceil((scrollTop + viewHeight) / ROW_H) + BUFFER);
+  const maxScroll = Math.max(0, totalH - viewHeight);
+  const clampedScrollTop = Math.min(scrollTop, maxScroll);
+  const startIdx = Math.max(0, Math.floor(clampedScrollTop / ROW_H) - BUFFER);
+  const endIdx   = Math.min(tasks.length - 1, Math.ceil((clampedScrollTop + viewHeight) / ROW_H) + BUFFER);
   const offsetY  = startIdx * ROW_H;
   const visible  = tasks.slice(startIdx, endIdx + 1);
 

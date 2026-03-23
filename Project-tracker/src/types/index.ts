@@ -23,6 +23,7 @@ export interface Task {
 }
 
 export interface Filters {
+  searchQuery: string;
   status: Status[];
   priority: Priority[];
   assignee: string[];

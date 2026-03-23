@@ -10,6 +10,7 @@ function parseURL(): Partial<{ view: ViewType; filters: Partial<Filters> }> {
     const p = new URLSearchParams(window.location.search);
     const view = (p.get('view') ?? 'kanban') as ViewType;
     const filters: Partial<Filters> = {
+      searchQuery: p.get('q') ?? '',
       status:    p.get('status')   ? (p.get('status')!.split(',') as Status[]) : [],
       priority:  p.get('priority') ? (p.get('priority')!.split(',') as any[])  : [],
       assignee:  p.get('assignee') ? p.get('assignee')!.split(',')             : [],
@@ -24,6 +25,7 @@ function pushURL(view: ViewType, filters: Filters): void {
   try {
     const p = new URLSearchParams();
     if (view !== 'kanban')          p.set('view',     view);
+    if (filters.searchQuery)        p.set('q',        filters.searchQuery);
     if (filters.status.length)      p.set('status',   filters.status.join(','));
     if (filters.priority.length)    p.set('priority', filters.priority.join(','));
     if (filters.assignee.length)    p.set('assignee', filters.assignee.join(','));
@@ -70,7 +72,7 @@ interface StoreState {
 }
 
 const EMPTY_FILTERS: Filters = {
-  status: [], priority: [], assignee: [], dateFrom: null, dateTo: null,
+  searchQuery: '', status: [], priority: [], assignee: [], dateFrom: null, dateTo: null,
 };
 
 const initial = parseURL();
@@ -110,6 +112,7 @@ export const useStore = create<StoreState>((set, get) => ({
   filteredTasks() {
     const { tasks, filters } = get();
     return tasks.filter(t => {
+      if (filters.searchQuery && !t.title.toLowerCase().includes(filters.searchQuery.toLowerCase())) return false;
       if (filters.status.length   && !filters.status.includes(t.status))         return false;
       if (filters.priority.length && !filters.priority.includes(t.priority))     return false;
       if (filters.assignee.length && !filters.assignee.includes(t.assignee.id))  return false;
