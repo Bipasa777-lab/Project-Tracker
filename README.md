@@ -2,7 +2,7 @@
 
 A fully functional multi-view project management frontend built with React, TypeScript, Tailwind CSS, and Zustand.
 
-**Live demo:** _https://your-deployment-url.vercel.app_
+**Live demo:https://project-tracker-pi-orpin.vercel.app/
 
 ---
 
