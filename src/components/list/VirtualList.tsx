@@ -94,9 +94,11 @@ export default function VirtualList({ tasks, sortKey, sortDir, onSort, onClearFi
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
-      {/* Table header */}
-      <div className="grid bg-bg-2 border-b border-border-1 flex-shrink-0"
-           style={{ gridTemplateColumns: '1fr 100px 120px 110px 160px' }}>
+      <div className="flex-1 flex flex-col overflow-x-auto">
+        <div className="min-w-[700px] flex-1 flex flex-col">
+          {/* Table header */}
+          <div className="grid bg-bg-2 border-b border-border-1 flex-shrink-0"
+               style={{ gridTemplateColumns: '1fr 100px 120px 110px 160px' }}>
         <div className="px-4 py-2.5">
           <SortHeader label="Title"    sortKey="title"    activeSortKey={sortKey} sortDir={sortDir} onSort={onSort} />
         </div>
@@ -153,6 +155,8 @@ export default function VirtualList({ tasks, sortKey, sortDir, onSort, onClearFi
             ))}
           </div>
         </div>
+      </div>
+      </div>
       </div>
 
       {/* Row count */}

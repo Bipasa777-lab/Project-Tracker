@@ -170,7 +170,7 @@ export default function KanbanView() {
   // ─── Render ────────────────────────────────────────────────────────────────
 
   return (
-    <div className="flex gap-3 h-full overflow-x-auto px-4 py-4">
+    <div className="flex gap-3 h-full overflow-x-auto px-2 sm:px-4 py-4">
       {STATUSES.map(status => {
         const colTasks   = getTasksForCol(status);
         const isDropZone = drag !== null && dropTarget?.status === status;

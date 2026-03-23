@@ -1,6 +1,6 @@
 export type Priority = 'critical' | 'high' | 'medium' | 'low';
 export type Status = 'todo' | 'inprogress' | 'inreview' | 'done';
-export type ViewType = 'kanban' | 'list' | 'timeline';
+export type ViewType = 'dashboard' | 'kanban' | 'list' | 'timeline' | 'profile' | 'settings';
 export type SortKey = 'title' | 'priority' | 'dueDate';
 export type SortDir = 'asc' | 'desc';
 

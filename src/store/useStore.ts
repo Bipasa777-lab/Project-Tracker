@@ -8,7 +8,7 @@ import { prioritySort } from '../utils';
 function parseURL(): Partial<{ view: ViewType; filters: Partial<Filters> }> {
   try {
     const p = new URLSearchParams(window.location.search);
-    const view = (p.get('view') ?? 'kanban') as ViewType;
+    const view = (p.get('view') ?? 'dashboard') as ViewType;
     const filters: Partial<Filters> = {
       searchQuery: p.get('q') ?? '',
       status:    p.get('status')   ? (p.get('status')!.split(',') as Status[]) : [],
@@ -24,7 +24,7 @@ function parseURL(): Partial<{ view: ViewType; filters: Partial<Filters> }> {
 function pushURL(view: ViewType, filters: Filters): void {
   try {
     const p = new URLSearchParams();
-    if (view !== 'kanban')          p.set('view',     view);
+    if (view !== 'dashboard')          p.set('view',     view);
     if (filters.searchQuery)        p.set('q',        filters.searchQuery);
     if (filters.status.length)      p.set('status',   filters.status.join(','));
     if (filters.priority.length)    p.set('priority', filters.priority.join(','));
@@ -80,7 +80,7 @@ const initial = parseURL();
 export const useStore = create<StoreState>((set, get) => ({
   tasks: generateTasks(520),
 
-  currentView: initial.view ?? 'kanban',
+  currentView: initial.view ?? 'dashboard',
   setView(v) {
     set({ currentView: v });
     pushURL(v, get().filters);

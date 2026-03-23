@@ -4,7 +4,6 @@ import { PRIORITY_COLORS } from '../../utils';
 import type { Task } from '../../types';
 
 const ROW_H    = 38;
-const LABEL_W  = 220;
 const HEADER_H = 36;
 const BUFFER   = 5;
 
@@ -111,8 +110,7 @@ export default function TimelineView() {
       <div className="flex flex-shrink-0 border-b border-border-1 bg-bg-2" style={{ height: HEADER_H }}>
         {/* Month label col */}
         <div
-          className="flex items-center px-3 flex-shrink-0 border-r border-border-1 text-xs font-semibold text-slate-400"
-          style={{ width: LABEL_W }}
+          className="flex items-center px-3 flex-shrink-0 border-r border-border-1 text-xs font-semibold text-slate-400 w-[120px] sm:w-[220px]"
         >
           {monthName}
         </div>
@@ -142,8 +140,7 @@ export default function TimelineView() {
         {/* Label sidebar */}
         <div
           ref={labelsRef}
-          className="flex-shrink-0 overflow-hidden border-r border-border-1 relative"
-          style={{ width: LABEL_W }}
+          className="flex-shrink-0 overflow-hidden border-r border-border-1 relative w-[120px] sm:w-[220px]"
         >
           {/* Virtual spacer container */}
           <div style={{ height: totalH, position: 'relative' }}>
