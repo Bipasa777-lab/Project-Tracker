@@ -1,4 +1,4 @@
-# Velozity Project Tracker
+# Project Tracker
 
 A fully functional multi-view project management frontend built with React, TypeScript, Tailwind CSS, and Zustand.
 

@@ -121,7 +121,7 @@ export default function LandingPage({ onEnterApp, onGoToSignIn, onGoToSignUp }: 
       
       {/* Footer */}
       <footer className="py-8 text-center text-slate-500 text-sm border-t border-border-1 bg-bg-1">
-        © 2026 Velozity Project Tracker. All rights reserved.
+        © 2026 Project Tracker. All rights reserved.
       </footer>
     </div>
   );
